@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrando la imagen del piso</title>
+</head>
+<body>
+    <h1>fotografia del piso</h1>
+
+    <ol>
+    {% for piso in pisos %}
+        <li>
+            {{ piso.numReferencia }} - {{ piso.direccion }} - {{ piso.cp }} - {{ piso.imagenPiso }}
+                <!--
+                {% if piso.imagenPiso %}
+                <img src="{{ piso.imagenPiso.url }}" style="width: 600px; " alt="Imagen del piso">
+                {% endif %}
+                -->
+        </li>
+    {% endfor %}
+    </ol>
+    <hr>
+
+    <ul>
+        {% for cliente in clientes %}
+            <li>
+                {{ cliente.nombre }} - {{ cliente.apellido }} - {{ cliente.telefono }} - {{ cliente.correo }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
