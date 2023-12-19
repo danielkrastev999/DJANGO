@@ -23,7 +23,10 @@ from principal import views
 
 urlpatterns = [
     # Cuando entre dentro de la ruta vacia, que se vaya a buscar el metodo 'catalogo' dentro de views.py
-    path('',views.catalogo),
+    path('',views.catalogo,name='catalogo'),
+    path('crearCliente/',views.crearCliente,name='crearCliente'),
+    path('modificarCliente/',views.modificarCliente, name='modificarCliente'),
+    path('borrarCliente/',views.borrarCliente, name='borrarCliente'),
     path('admin/', admin.site.urls),
 ]
 
