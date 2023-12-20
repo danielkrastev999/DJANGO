@@ -21,7 +21,7 @@ def catalogo(request):
 # Crear un cliente
 def crearCliente(request):
     # Insertar un cliente
-    cli = Cliente(nombre="El Pepe",apellido="Fernandez", telefono="643234564", correo="elpepe@gmail.com", inversor=False)
+    cli = Cliente(nombre="Pepe",apellido="Fernandez", telefono="643234564", correo="elpepe@gmail.com", inversor=False)
     # Guardar el cliente
     cli.save()
     # Para ejecutarlo, tenemos que añadirlo a urls.py
@@ -50,5 +50,19 @@ def borrarCliente(request):
         cli.delete()
     except:
         pass
+
     # Para volver a llamar a 'catalogo' hay que importar 'HttpResponseRedirect' y 'reverse'
     return HttpResponseRedirect(reverse('catalogo'))
+
+def borrarPepe(request):
+
+    # Guardar en una variable todos los clientes con el nombre 'pepe'
+    cliPepes = Cliente.objects.filter(nombre__exact = 'Pepe')
+
+    # Buscar los pepes y eliminarlos de la base de datos
+    for pep in cliPepes:
+        pep.delete()
+
+    return HttpResponseRedirect(reverse('catalogo'))
+
+   

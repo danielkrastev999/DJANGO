@@ -27,6 +27,8 @@ urlpatterns = [
     path('crearCliente/',views.crearCliente,name='crearCliente'),
     path('modificarCliente/',views.modificarCliente, name='modificarCliente'),
     path('borrarCliente/',views.borrarCliente, name='borrarCliente'),
+    path('borrarPepes/',views.borrarPepe, name='borrarPepes'),
+    
     path('admin/', admin.site.urls),
 ]
 
