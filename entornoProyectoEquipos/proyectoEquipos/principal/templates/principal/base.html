@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog V2</title>
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            padding-top: 60px; /* Ajuste del contenido para navbar fijo */
+        }
+        nav {
+            border-bottom: 2px solid #ddd; /* Línea divisoria para el navbar */
+        }
+        .navbar-brand {
+            font-size: 1.5rem; /* Tamaño del texto del logo */
+        }
+        .navbar-nav .nav-item {
+            margin-right: 10px; /* Espaciado entre elementos del navbar */
+        }
+        .navbar-nav .nav-link {
+            color: white; /* Color del texto del navbar */
+        }
+        .navbar-nav .nav-link.active {
+            font-weight: bold; /* Texto en negrita para la página activa */
+        }
+        .navbar-toggler-icon {
+            background-color: white; /* Color del ícono del botón de alternancia en el navbar */
+        }
+        /* Puedes agregar más estilos personalizados según tus preferencias */
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'inicio' %}"><img style="width: 50px;" src="https://static.vecteezy.com/system/resources/previews/021/948/181/non_2x/3d-home-icon-free-png.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle href="#" role="button" data-bs-toggle="dropdown">Equipos</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item {% if request.path == '/listado/' %}active{% endif %}" href="{% url 'listado' %}">Listar Equipos</a></li>
+                            {% if request.user.is_authenticated %}
+                            <li><a class="dropdown-item {% if request.path == '/crear-equipo/' %}active{% endif %}" href="{% url 'crear_equipo' %}">Crear Equipo</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle  href="#" role="button" data-bs-toggle="dropdown">Jugadores</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item {% if request.path == '/listar-jugadores/' %}active{% endif %}" href="listar-jugadores">Listar Jugadores</a></li>
+                            {% if request.user.is_authenticated %}
+                            <li><a class="dropdown-item {% if request.path == '/crear-jugador/' %}active{% endif %}" href="{% url 'crear_jugador' %}">Crear Jugador</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle  href="#" role="button" data-bs-toggle="dropdown">Competiciones</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item {% if request.path == '/listar-competicion/' %}active{% endif %}" href="{% url 'listar-competicion' %}">Listar Competiciones</a></li>
+                            {% if request.user.is_authenticated %}
+                            <li><a class="dropdown-item {% if request.path == '/crear-competicion/' %}active{% endif %}" href="{% url 'crear_competicion' %}">Crear Competicion</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3">
+                        <ul class="navbar-nav">
+                            {% if request.user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link">Usuario: '{{ request.user }}'</a>
+                                </li>
+                            {% else  %}
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Entrar</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4"> <!-- Agrega un margen superior al contenido principal -->
+        {% block contenido %}
+        {% endblock %}
+    </div>
+</body>
+</html>

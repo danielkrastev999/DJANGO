@@ -1,0 +1,19 @@
+{% extends "principal/base.html" %}
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            {% for competicion in competicion_list|dictsort:"nombre" %}
+                <!-- Información de competicion -->
+                <div class="card mt-3">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">{{ competicion.nombre }}</h6>
+                        <p><b>Lugar:</b> {{ competicion.lugar }}</p>
+                        
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

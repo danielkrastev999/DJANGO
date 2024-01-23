@@ -1,0 +1,39 @@
+{% extends "principal/base.html" %}
+{% block contenido %}
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            {% for equipo in equipo_list|dictsort:"nombre" %}
+            <div class="card mb-3 mx-auto" style="max-width: 600px;">
+                <div class="card-body text-center"> <!-- Añade la clase text-center aquí -->
+                    <h5 class="card-title">{{ equipo }} (Creado por {{ equipo.responsable }})</h5>
+                    <p class="card-text">{{ equipo.categoria }}</p>
+                    <p class="card-text">
+                        Competición:
+                        {% for categ in equipo.competicion.all %}
+                        <a href="">{{ categ }}</a>{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><small class="text-muted">Modificado {{ equipo.modificado }}</small></p>
+
+                    <!-- Si el usuario actual es el responsable, muestra los enlaces -->
+                    {% if equipo.responsable == request.user %}
+                    <p class="card-text">
+                        <small class="text-muted">
+                            <a style="color: red;" href="{% url 'borrar' equipo.id %}">Borrar Equipo</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </small>
+                        <small class="text-muted">
+                            <a style="color: green;" href="{% url 'modificar' equipo.id %}">Modificar Equipo</a>
+                        </small>
+                    </p>
+                    {% endif %}
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "principal/base.html" %}
+{% block contenido %}
+    <form method="post">
+        {% csrf_token %}
+            <p>¿Quieres borrar la competicion "{{ competicion }}"?</p>
+        <input type="submit" value="Confirmar">
+        <a class="btn btn-secondary btn-sm"  href="{% url 'listado' %}">Cancelar</a>
+    </form>
+{% endblock %}

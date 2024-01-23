@@ -1,0 +1,35 @@
+{% extends "principal/base.html" %}
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            {% for jugador in jugador_list|dictsort:"nombre" %}
+                <!-- Información del jugador -->
+                <div class="card mt-3">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">{{ jugador.nombre }}</h4>
+                        <p><b>Equipo:</b> {{ jugador.equipo }}</p>
+                        <p><b>Correo:</b> {{ jugador.correo }}</p>
+                        <p><b>Edad:</b> {{ jugador.edad }}</p>
+                        {% if jugador.imagen %}
+                            <img src="{{ jugador.imagen.url }}" class="img-fluid rounded-start" alt="imagen de {{ jugador }}" style="max-width: 500px;">
+                        {% endif %}
+                        <!-- Puedes agregar enlaces de borrado/modificación si es necesario -->
+                        <!-- Si el usuario actual es el responsable, muestra los enlaces -->
+                        {% if jugador.equipo.responsable == request.user %}
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <a style="color: rgb(190, 8, 8);" href="{% url 'borrar_jugador' jugador.id %}">Borrar Jugador</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </small>
+                                <small class="text-muted">
+                                    <a style="color: green;" href="{% url 'modificar_jugador' jugador.id %}">Modificar Jugador</a>
+                                </small>
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
