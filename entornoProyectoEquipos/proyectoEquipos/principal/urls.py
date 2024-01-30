@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import listadoEquipo, crearEquipo, borrarEquipo, modificarEquipo, inicio, listadoCompeticion,borrarCompeticion, modificarCompeticion, listadoJugadores, borrarJugador, modificarJugador, crearJugador,crearCompeticion
+from .views import listadoEquipo,detalleEquipo,detalleJugador, detalleCompeticion, crearEquipo, borrarEquipo, modificarEquipo, inicio, listadoCompeticion,borrarCompeticion, modificarCompeticion, listadoJugadores, borrarJugador, modificarJugador, crearJugador,crearCompeticion
 
 urlpatterns = [
     path('', inicio.as_view(),name='inicio'),
@@ -18,5 +18,10 @@ urlpatterns = [
     path('crear-competicion', crearCompeticion.as_view(),name='crear_competicion'),
     path('borrar/competicion/<int:pk>/', borrarCompeticion.as_view(), name='borrar_competicion'),
     path('modificar/competicion/<int:pk>/', modificarCompeticion.as_view(), name='modificar_competicion'),
+
+    path('equipo/<int:pk>/', detalleEquipo.as_view(), name='equipo_detail'),
+    path('competicion/<int:pk>/', detalleCompeticion.as_view(), name='competicion_detail'),
+    path('jugador/<int:pk>/', detalleJugador.as_view(), name='jugador_detail'),
+
     
 ]

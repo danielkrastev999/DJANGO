@@ -1,0 +1,25 @@
+{% extends "principal/base.html" %}
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+                <div class="card mt-3">
+                    <div class="card-body text-center">
+
+                    <h5 class="mt-3">Equipos que juegan en la '{{ competicion.nombre }}'</h5>
+                    <ul>
+                        {% for equipo in competicion.equipo_set.all %}
+                        <li style="list-style: none;">
+                            <a href="{% url 'equipo_detail' equipo.id %}">
+                                {{ equipo.nombre }}
+                            </a></p>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <p><b>Lugar:</b> {{ competicion.lugar }}</p>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -7,7 +7,11 @@
                 <!-- Información de competicion -->
                 <div class="card mt-3">
                     <div class="card-body text-center">
-                        <h6 class="card-title">{{ competicion.nombre }}</h6>
+                        <h6 class="card-title">
+                            <a href="{% url 'competicion_detail' competicion.id %}">
+                                {{ competicion }}
+                            </a></p>
+                        </h6>
                         <p><b>Lugar:</b> {{ competicion.lugar }}</p>
                         
                     </div>

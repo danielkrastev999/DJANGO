@@ -1,0 +1,23 @@
+body {
+    padding-top: 60px; /* Ajuste del contenido para navbar fijo */
+}
+nav {
+    position: relative;
+    border-bottom: 2px solid #ddd; /* Línea divisoria para el navbar */
+}
+.navbar-brand {
+    font-size: 1.5rem; /* Tamaño del texto del logo */
+}
+.navbar-nav .nav-item {
+    margin-right: 10px; /* Espaciado entre elementos del navbar */
+}
+.navbar-nav .nav-link {
+    color: white; /* Color del texto del navbar */
+}
+.navbar-nav .nav-link.active {
+    font-weight: bold; /* Texto en negrita para la página activa */
+}
+.navbar-toggler-icon {
+    background-color: white; /* Color del ícono del botón de alternancia en el navbar */
+}
+/* Puedes agregar más estilos personalizados según tus preferencias */

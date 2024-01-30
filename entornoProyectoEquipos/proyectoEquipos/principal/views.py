@@ -12,8 +12,9 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
-from .models import Equipo, Jugador
+from .models import Equipo, Jugador, Competicion
 
 # Clase inicio que hereda directamente de 'TemplateView'
 class inicio(TemplateView):
@@ -31,6 +32,20 @@ class listadoJugadores(ListView):
 class listadoCompeticion(ListView):
     model = Competicion
 
+# Ver los detalles de un equipo en concreto
+class detalleEquipo(DetailView):
+    model = Equipo
+
+# Ver los detalles de una competicion en concreto
+class detalleCompeticion(DetailView):
+    model = Competicion
+
+# Ver los detalles de un jugador en concreto
+class detalleJugador(DetailView):
+    model = Jugador
+
+
+
 
 
 @method_decorator(login_required,name='dispatch')
@@ -38,7 +53,7 @@ class crearEquipo (CreateView):
     # 1. Decir que modelo quiero crear
     model = Equipo
     # 2. Decir los campos que quier mostrar
-    fields = ['nombre','categoria','competicion','responsable']
+    fields = ['nombre','categoria','competicion','imagen','responsable']
     # 3. Cuando acabe de crear un equipo que vaya a 'listado'
     success_url = reverse_lazy('listado')
 

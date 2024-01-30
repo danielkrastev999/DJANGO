@@ -7,24 +7,39 @@
             {% for equipo in equipo_list|dictsort:"nombre" %}
             <div class="card mb-3 mx-auto" style="max-width: 600px;">
                 <div class="card-body text-center"> <!-- Añade la clase text-center aquí -->
-                    <h5 class="card-title">{{ equipo }} (Creado por {{ equipo.responsable }})</h5>
+                    <h5 class="card-title">{{ equipo }} </h5>
+
+                    {% if equipo.imagen %}
+                            <img style="width: 120px;" src="{{ equipo.imagen.url }}" class="img-fluid rounded-start" alt="imagen de {{ equipo }}" style="max-width: 500px;">
+                    {% endif %}
+
                     <p class="card-text">{{ equipo.categoria }}</p>
                     <p class="card-text">
                         Competición:
                         {% for categ in equipo.competicion.all %}
-                        <a href="">{{ categ }}</a>{% if not forloop.last %},{% endif %}
+                        <a style="text-decoration: none;" href="{% url 'competicion_detail' categ.id %}">{{ categ }}</a>{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </p>
+
+                    <p>Jugadores: 
+                        {% for jugador in equipo.jugador_set.all|dictsort:"nombre" %}
+                                <a style="text-decoration: none;" href="{% url 'jugador_detail' jugador.id %}">
+                                    {{ jugador.nombre }}
+                                </a>{% if not forloop.last %}, {% endif %}
+                        {% endfor %} 
+                    </p>
+
                     <p class="card-text"><small class="text-muted">Modificado {{ equipo.modificado }}</small></p>
+                    <p class="card-text"><small class="text-muted">(Creado por '{{ equipo.responsable }}')</small></p>
 
                     <!-- Si el usuario actual es el responsable, muestra los enlaces -->
                     {% if equipo.responsable == request.user %}
                     <p class="card-text">
                         <small class="text-muted">
-                            <a style="color: red;" href="{% url 'borrar' equipo.id %}">Borrar Equipo</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a style="color: red;text-decoration: none;" href="{% url 'borrar' equipo.id %}">Borrar Equipo</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </small>
                         <small class="text-muted">
-                            <a style="color: green;" href="{% url 'modificar' equipo.id %}">Modificar Equipo</a>
+                            <a style="color: green;text-decoration: none;" href="{% url 'modificar' equipo.id %}">Modificar Equipo</a>
                         </small>
                     </p>
                     {% endif %}

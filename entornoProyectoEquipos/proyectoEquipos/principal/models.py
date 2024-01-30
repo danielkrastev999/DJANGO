@@ -24,6 +24,7 @@ class Equipo(models.Model):
     creado = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación del Equipo")
     modificado = models.DateTimeField(auto_now=True, verbose_name="Fecha de modificación del Equipo")
     competicion = models.ManyToManyField(Competicion, verbose_name="Competicion")
+    imagen = models.ImageField(verbose_name="Foto", null=True, blank=True, upload_to="fotos")
     responsable = models.ForeignKey(User, on_delete=models.CASCADE)
 
     # Lo que quiero que salga cuando digo: 'enseñame este objeto'
@@ -40,7 +41,7 @@ class Jugador(models.Model):
     # pongo equipo para relacionarlo directamennte con la clase de arriba
     #   y añado que se elimine en cascada
     equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE) 
-    nombre = models.CharField(max_length=50,verbose_name="Nombre del Jufador")
+    nombre = models.CharField(max_length=50,verbose_name="Nombre del Jugador")
     correo = models.EmailField()
     imagen = models.ImageField(verbose_name="Foto", null=True, blank=True, upload_to="fotos")
     edad = models.IntegerField()

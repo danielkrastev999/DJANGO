@@ -3,7 +3,6 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
-            {% for jugador in jugador_list|dictsort:"nombre" %}
                 <!-- Información del jugador -->
                 <div class="card mt-3">
                     <div class="card-body text-center">
@@ -31,7 +30,6 @@
                         {% endif %}
                     </div>
                 </div>
-            {% endfor %}
         </div>
     </div>
 </div>

@@ -1,0 +1,14 @@
+{% extends "principal/base.html" %}
+{% block contenido %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <p><input type="text" name="username" required class="form-control" placeholder="Nombre de usuario"></p>
+    <p><input type="password" name="password" required class="form-control" placeholder="Password"></p>
+    <br>
+    <div class="text-center">
+        <input type="submit" class="btn-secondary btn-block" value="Login">
+    </div>
+</form>
+
+{% endblock %}

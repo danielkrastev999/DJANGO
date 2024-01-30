@@ -1,0 +1,39 @@
+{% extends "principal/base.html" %}
+{% block contenido %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="card mt-3">
+                <div class="card-body text-center">
+                    <h4 class="card-title">{{ equipo.nombre }}</h4>
+
+                    {% if equipo.imagen %}
+                            <img style="width: 120px;" src="{{ equipo.imagen.url }}" class="img-fluid rounded-start" alt="imagen de {{ equipo }}" style="max-width: 500px;">
+                    {% endif %}
+                    <!-- Agrega aquí cualquier otra información que desees mostrar sobre el equipo -->
+                    <p>{{ equipo.categoria }}</p>
+                    <p class="card-text">
+                        <b>Competición:</b>
+                        {% for competicion in equipo.competicion.all|dictsort:"nombre" %}
+                        <a href="{% url 'competicion_detail' competicion.id %}">
+                            {{ competicion }}
+                        </a>{% if not forloop.last %},{% endif %}
+                        {% endfor %}
+                    </p>
+                    <!-- Aquí puedes mostrar la lista de jugadores del equipo -->
+                    <h5 class="mt-3">Jugadores del equipo:</h5>
+                    <ul>
+                        {% for jugador in equipo.jugador_set.all|dictsort:"nombre" %}
+                            <li style="list-style: none;">
+                                <a href="{% url 'jugador_detail' jugador.id %}">
+                                    {{ jugador.nombre }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
