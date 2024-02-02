@@ -7,8 +7,9 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
-from .models import Articulo
+from .models import Articulo, Categoria
 
 # Clase inicio que hereda directamente de 'TemplateView'
 class inicio(TemplateView):
@@ -17,6 +18,9 @@ class inicio(TemplateView):
 # Ver el contenido de una tabla
 class listadoArticulos(ListView):
     model = Articulo
+
+class categoriaDetalle(DetailView):
+    model = Categoria
 
 
 @method_decorator(login_required,name='dispatch')

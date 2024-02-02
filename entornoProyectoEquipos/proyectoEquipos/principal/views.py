@@ -62,7 +62,7 @@ class crearEquipo (CreateView):
     def form_valid(self,form):
         # El usuario que esta en el sistema ahora será el que cree en equipo
         form.instance.responsable = self.request.user
-        # Este formulario se ejectura con lo que ha heredado de la clase padre (super)
+        # Este formulario ejecutara la funcion padre de CreateView con el formulario validado !!!!
         return super(crearEquipo,self).form_valid(form)
     
 
@@ -198,3 +198,4 @@ class modificarCompeticion(UpdateView):
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
     
+        

@@ -1,0 +1,28 @@
+{% extends 'principal/base.html' %}
+{% block contenido %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col p-3 bg-warning text-white text-center">
+            <h1>Contacto</h1>
+        </div>
+    </div>
+
+    {% if 'ok' in request.GET %}
+        <p><b>*Datos recibidos</b></p>
+    {% endif %}
+    <div class="row mt-5">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <!-- si dejamos el action vacio, llama otra vez a la ruta contacto-->
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                    {{ formulario.as_table }}
+                </table>
+                <input type="submit" value="Enviar">
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import inicio, listadoArticulos, crearArticulo, borrarArticulo, modificarArticulo
+from .views import inicio, listadoArticulos, crearArticulo, borrarArticulo, modificarArticulo,categoriaDetalle
 
 urlpatterns = [
     # Llamamos al metodo as_view() -> me presenta un formulario y se crea en la bd al darle a crear
@@ -9,4 +9,5 @@ urlpatterns = [
     path('crear', crearArticulo.as_view(),name='crear'),
     path('borrar/<int:pk>', borrarArticulo.as_view(),name='borrar'),
     path('modificar/<int:pk>', modificarArticulo.as_view(),name='modificar'),
+    path('categoriaDetalle/<int:pk>', categoriaDetalle.as_view(),name='categoriaDetalle'),
 ]

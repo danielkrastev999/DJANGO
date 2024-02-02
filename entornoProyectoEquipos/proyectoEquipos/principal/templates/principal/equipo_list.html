@@ -4,24 +4,27 @@
     <div class="row">
         <div class="col-1"></div>
         <div class="col-10">
-            {% for equipo in equipo_list|dictsort:"nombre" %}
+            {% for equipo in equipo_list|dictsort:"nombre" %} <!--Ordena alfabeticamente los equipos-->
             <div class="card mb-3 mx-auto" style="max-width: 600px;">
                 <div class="card-body text-center"> <!-- Añade la clase text-center aquí -->
                     <h5 class="card-title">{{ equipo }} </h5>
-
+                    <!--Si existe imagen en el equipo, muestrala-->
                     {% if equipo.imagen %}
                             <img style="width: 120px;" src="{{ equipo.imagen.url }}" class="img-fluid rounded-start" alt="imagen de {{ equipo }}" style="max-width: 500px;">
-                    {% endif %}
+                    {% endif %} 
 
                     <p class="card-text">{{ equipo.categoria }}</p>
                     <p class="card-text">
                         Competición:
-                        {% for categ in equipo.competicion.all %}
+                        {% for categ in equipo.competicion.all %} 
+                        <!--Redirige a competicion_detail y pasa el id como segundo parametro ya que lo exige para poder mostrarlo en urls-->
+                        <!--path('competicion/<int:pk>/', detalleCompeticion.as_view(), name='competicion_detail'),-->
                         <a style="text-decoration: none;" href="{% url 'competicion_detail' categ.id %}">{{ categ }}</a>{% if not forloop.last %},{% endif %}
                         {% endfor %}
                     </p>
 
                     <p>Jugadores: 
+                        <!--Ocurre lo mismo que en el for de competicion-->
                         {% for jugador in equipo.jugador_set.all|dictsort:"nombre" %}
                                 <a style="text-decoration: none;" href="{% url 'jugador_detail' jugador.id %}">
                                     {{ jugador.nombre }}

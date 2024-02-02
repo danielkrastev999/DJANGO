@@ -1,0 +1,12 @@
+{% extends "principal/base.html" %}
+{% block contenido %}
+
+    {{ categoria.nombre }} <br>
+    {{ categoria.descripcion }} <br>
+<ul>
+    {% for articulo in categoria.articulo_set.all %}
+       <li>{{ articulo.titulo }}</li>  
+    {% endfor %}
+</ul>
+
+{% endblock %}

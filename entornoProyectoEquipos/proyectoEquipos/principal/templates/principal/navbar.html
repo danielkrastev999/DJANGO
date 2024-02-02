@@ -1,0 +1,68 @@
+
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'inicio' %}">
+            <img style="width: 50px;" src="https://static.vecteezy.com/system/resources/previews/021/948/181/non_2x/3d-home-icon-free-png.png" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Opciones del menú para Equipos -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Equipos</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item {% if request.path == '/listado/' %}active{% endif %}" href="{% url 'listado' %}">Listar Equipos</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a class="dropdown-item {% if request.path == '/crear-equipo/' %}active{% endif %}" href="{% url 'crear_equipo' %}">Crear Equipo</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                
+                <!-- Opciones del menú para Jugadores -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Jugadores</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item {% if request.path == '/listar-jugadores/' %}active{% endif %}" href="listar-jugadores">Listar Jugadores</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a class="dropdown-item {% if request.path == '/crear-jugador/' %}active{% endif %}" href="{% url 'crear_jugador' %}">Crear Jugador</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                
+                <!-- Opciones del menú para Competiciones -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Competiciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item {% if request.path == '/listar-competicion/' %}active{% endif %}" href="{% url 'listar-competicion' %}">Listar Competiciones</a></li>
+                        {% if request.user.is_authenticated %}
+                        <li><a class="dropdown-item {% if request.path == '/crear-competicion/' %}active{% endif %}" href="{% url 'crear_competicion' %}">Crear Competicion</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ms-auto">
+                <!-- Sección de usuario autenticado -->
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link">{{ request.user }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="nav-link" value="Salir">
+                        </form>
+                    </li>
+                <!-- Sección de usuario no autenticado -->
+                {% else  %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

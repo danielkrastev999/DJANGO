@@ -20,15 +20,31 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'crear' %}">Crear Artículo</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link">{{ request.user }}</a>
-            </li>
-            {% else  %}
-            <li class="nav-item">
-              <a class="nav-link">Entrar</a>
-            </li>
             {% endif %}
           </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contacto' %}">Contacto</a> <!--NUEVO !-->
+            </li>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link">'{{ request.user }}'</a>
+                </li>
+                <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="nav-link" value="Salir">
+                    </form>
+                </li>
+            {% else  %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Entrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'registro' %}">Registrarse</a>
+                </li>
+            {% endif %}
+        </ul
         </div>
       </nav>    
       {% block contenido %}

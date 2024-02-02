@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gestión hospitalaria</title>
+        <link rel="stylesheet" href="{% static 'core/css/misEstilos.css' %}">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="navbar-left">
+                <a href="{% url 'inicio' %}">Inicio</a> <!--redireccion a inicio-->
+                <div class="dropdown">
+                    <button class="dropbtn" onmouseenter="myFunction(1)" onmouseleave="myFunction(1)">Hospitales</button>
+                    <div class="dropdown-content" id="myDropdown1">
+                        <a href="#" onmouseenter="myFunction(1)" onmouseleave="myFunction(1)">Listado</a>
+                        <a href="#" onmouseenter="myFunction(1)" onmouseleave="myFunction(1)">Crear</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" onmouseenter="myFunction(2)" onmouseleave="myFunction(2)">Medicos</button>
+                    <div class="dropdown-content" id="myDropdown2">
+                        <a href="#" onmouseenter="myFunction(2)" onmouseleave="myFunction(2)">Listado</a>
+                        <a href="#" onmouseenter="myFunction(2)" onmouseleave="myFunction(2)">Crear</a>
+                    </div>
+                </div>  
+                <div class="dropdown">
+                    <button class="dropbtn" onmouseenter="myFunction(3)" onmouseleave="myFunction(3)">Pacientes</button>
+                    <div class="dropdown-content" id="myDropdown3">
+                        <a href="#" onmouseenter="myFunction(3)" onmouseleave="myFunction(3)">Listado</a>
+                        <a href="#" onmouseenter="myFunction(3)" onmouseleave="myFunction(3)">Crear</a>
+                    </div>
+                </div>                              
+            </div>
+            <div class="navbar-right">
+                {% block contenido%}{% endblock %}
+
+            </div>            
+        </div>
+       
+        <h3>Dropdown Menu inside a Navigation Bar</h3>
+        <p>Click on the "Dropdown" link to see the dropdown menu.</p>
+       
+        <script src="{% static 'core/js/jsEstilos.js' %}"></script>
+
+    </body>
+</html>
