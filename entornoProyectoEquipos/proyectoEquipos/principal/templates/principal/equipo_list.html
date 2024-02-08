@@ -25,7 +25,7 @@
 
                     <p>Jugadores: 
                         <!--Ocurre lo mismo que en el for de competicion-->
-                        {% for jugador in equipo.jugador_set.all|dictsort:"nombre" %}
+                        {% for jugador in equipo.jugadores.all|dictsort:"nombre" %}
                                 <a style="text-decoration: none;" href="{% url 'jugador_detail' jugador.id %}">
                                     {{ jugador.nombre }}
                                 </a>{% if not forloop.last %}, {% endif %}
@@ -33,7 +33,7 @@
                     </p>
 
                     <p class="card-text"><small class="text-muted">Modificado {{ equipo.modificado }}</small></p>
-                    <p class="card-text"><small class="text-muted">(Creado por '{{ equipo.responsable }}')</small></p>
+                    <p class="card-text"><small class="text-muted">(Creado por: {{ equipo.responsable }})</small></p>
 
                     <!-- Si el usuario actual es el responsable, muestra los enlaces -->
                     {% if equipo.responsable == request.user %}

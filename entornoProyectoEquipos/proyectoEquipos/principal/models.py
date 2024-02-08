@@ -11,6 +11,7 @@ class Competicion(models.Model):
     creado = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación de la competicion")
     modificado = models.DateTimeField(auto_now=True, verbose_name="Fecha de modificación de la competicion")
 
+
     def __str__(self):
         return self.nombre
     
@@ -23,7 +24,7 @@ class Equipo(models.Model):
     categoria = models.CharField(max_length=50, verbose_name="Categoria")
     creado = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de creación del Equipo")
     modificado = models.DateTimeField(auto_now=True, verbose_name="Fecha de modificación del Equipo")
-    competicion = models.ManyToManyField(Competicion, verbose_name="Competicion")
+    competicion = models.ManyToManyField(Competicion, verbose_name="Competicion", related_name='equipos')
     imagen = models.ImageField(verbose_name="Foto", null=True, blank=True, upload_to="fotos")
     responsable = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -40,7 +41,7 @@ class Equipo(models.Model):
 class Jugador(models.Model):
     # pongo equipo para relacionarlo directamennte con la clase de arriba
     #   y añado que se elimine en cascada
-    equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE) 
+    equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE,related_name='jugadores') 
     nombre = models.CharField(max_length=50,verbose_name="Nombre del Jugador")
     correo = models.EmailField()
     imagen = models.ImageField(verbose_name="Foto", null=True, blank=True, upload_to="fotos")

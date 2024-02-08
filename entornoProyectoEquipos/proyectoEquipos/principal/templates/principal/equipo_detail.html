@@ -24,7 +24,7 @@
                     <!-- Aquí puedes mostrar la lista de jugadores del equipo -->
                     <h5 class="mt-3">Jugadores del equipo:</h5>
                     <ul>
-                        {% for jugador in equipo.jugador_set.all|dictsort:"nombre" %}
+                        {% for jugador in equipo.jugadores.all|dictsort:"nombre" %}
                             <li style="list-style: none;">
                                 <a href="{% url 'jugador_detail' jugador.id %}">
                                     {{ jugador.nombre }}

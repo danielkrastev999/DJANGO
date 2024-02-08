@@ -13,6 +13,17 @@
                             </a></p>
                         </h6>
                         <p><b>Lugar:</b> {{ competicion.lugar }}</p>
+
+                        {% if competicion.equipo.responsable == request.user %}
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <a style="color: rgb(190, 8, 8);" href="{% url 'borrar_competicion' competicion.id %}">Borrar Competicion</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </small>
+                                <small class="text-muted">
+                                    <a style="color: green;" href="{% url 'modificar_competicion' competicion.id %}">Modificar Competicion</a>
+                                </small>
+                            </p>
+                        {% endif %}
                         
                     </div>
                 </div>
