@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogV1</title>
+</head>
+<body>
+    <h1>Mi blog</h1>
+    <!--Si hay categoria sale la linea completa, sino solo sale 'Listado de articulos'-->
+    <h2>Listado de articulos {% if nombreCateg %} de la categoria '{{ nombreCateg }}' {% endif %}</h2>
+
+    <ol>
+    {% for articulo in articulos %}
+        <li>
+            <p>{{ articulo}}</p>
+        <hr>
+
+        <p>{{ articulo }} (Creado por {{ articulo.autor}})</p>
+
+        <p>Categorias: 
+            {% for categ in articulo.categoria.all %}
+                <!--Crear la ruta a la categoria-->
+                <a href="{% url 'artxcatg' categ.id %}">{{ categ }}</a>
+                    <!--Si no es el ultimo elemento, pon una 'coma'-->
+                    {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+
+            <!--Si existe una imagen entonces la añadimos-->
+            {% if articulo.imagen %}<img src="{{ articulo.imagen.url }}" style="width: 400px;">{% endif %}
+        <hr>
+
+        <p>{{ articulo.texto }}</p>
+            <!--IMPORTANTE -->
+            <!--A traves de una relacion inversa, puedo acceder a todos los comentarios de ese articulo-->
+            {% for comentario in articulo.comentario_set.all %}
+                <p>{{ comentario.texto }}</p>
+            {% endfor %}
+        <hr>
+
+        </li>
+    {% endfor %}
+    </ol>
+</body>
+</html>
